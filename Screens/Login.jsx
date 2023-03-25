@@ -1,8 +1,15 @@
-import { Text, View } from "react-native";
+import {
+  View,
+  Colors,
+  Dash,
+  Text,
+  TouchableOpacity,
+} from "react-native-ui-lib";
 import FormButton from "../components/FormButton";
 import FormInput from "../components/FormInput";
 import SignInWrapper from "../components/SignInWrapper";
 import SocialButton from "../components/SocialButton";
+import { windowWidth } from "../utils/getDimension";
 
 const fields = [
   { icon: "user", placeholder: "Enter your email" },
@@ -19,6 +26,23 @@ export default function Login() {
           ))}
         </View>
         <FormButton buttonTitle="Log In" />
+        <View style={{ marginTop: 50, alignItems: "center", gap: 40 }}>
+          <Dash length={windowWidth} thickness={3} color={Colors.grey60} />
+          <SocialButton />
+        </View>
+
+        <TouchableOpacity>
+          <Text
+            text70M
+            underline
+            style={{
+              color: Colors.$textPrimary,
+              fontWeight: "bold",
+            }}
+          >
+            Don't Have An Account? Create One
+          </Text>
+        </TouchableOpacity>
       </View>
     </SignInWrapper>
   );
