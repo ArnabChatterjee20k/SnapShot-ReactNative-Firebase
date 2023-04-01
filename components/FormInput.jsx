@@ -1,7 +1,8 @@
 import React from "react";
 import { View, TextField, Colors } from "react-native-ui-lib";
 import AntDesign from "react-native-vector-icons/AntDesign";
-export default function FormInput({ placeholder, icon }) {
+
+export default function FormInput({ placeholder, icon,value ,setter }) {
   return (
     <View
       backgroundColor={Colors.grey60}
@@ -17,6 +18,7 @@ export default function FormInput({ placeholder, icon }) {
     >
       <AntDesign name={icon} size={25} />
       <TextField
+        value={value}
         placeholder={placeholder}
         placeholderTextColor="black"
         style={{
@@ -24,6 +26,7 @@ export default function FormInput({ placeholder, icon }) {
           backgroundColor: Colors.grey60,
           color: "black",
         }}
+        onChangeText = {text=>setter(text)}
       />
     </View>
   );
