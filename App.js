@@ -1,5 +1,9 @@
 import RouteProvider from "./navigations";
-
+import AuthContextProvider from "./context/AuthContext";
 export default function App() {
-  return <RouteProvider />;
+  return (
+    <AuthContextProvider>
+      <RouteProvider />
+    </AuthContextProvider>
+  );
 }
