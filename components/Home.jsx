@@ -7,13 +7,14 @@ import BottomNavigation, {
 } from "react-native-material-bottom-navigation";
 import { Title, Container } from "../Styles/Styles";
 import NavWrapper from "./NavWrapper";
+import Posts from "./Posts";
 
 export default function Home() {
   // const {user} = useAuthContext()
   return (
     <NavWrapper>
       <Container>
-        <Title>Hello</Title>
+        <Posts/>
       </Container>
     </NavWrapper>
   );
