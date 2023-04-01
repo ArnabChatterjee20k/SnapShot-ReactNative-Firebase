@@ -10,7 +10,8 @@ export default function Routes() {
   const { auth } = useFirebase();
   return (
     <NavigationContainer>
-      {user ? <AppStack /> : <AuthStack />}
+      {/* {user ? <AppStack /> : <AuthStack />} */}
+      <AppStack /> 
     </NavigationContainer>
   );
 }
