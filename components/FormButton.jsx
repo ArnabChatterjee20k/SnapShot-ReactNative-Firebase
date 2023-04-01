@@ -5,7 +5,7 @@ import { Colors } from "react-native-ui-lib";
 import { windowHeigth, windowWidth } from "../utils/getDimension";
 
 export default function FormButton({ buttonTitle , ...props}) {
-  console.log(props)
+  // console.log(props)
   return (
     <View>
       <Button

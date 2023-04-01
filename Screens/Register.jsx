@@ -1,25 +1,24 @@
-import { useState } from "react";
+import SignInWrapper from "../components/SignInWrapper";
+import React, { useState } from "react";
+import useFirebaseAuth from "../hooks/useFirebaseAuth";
+import { windowWidth } from "../utils/getDimension";
 import {
   View,
   Colors,
   Dash,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native-ui-lib";
-
 import FormButton from "../components/FormButton";
-import FormInput from "../components/FormInput";
-import SignInWrapper from "../components/SignInWrapper";
 import SocialButton from "../components/SocialButton";
-import { windowWidth } from "../utils/getDimension";
-import useFirebaseAuth from "../hooks/useFirebaseAuth";
-import { exceptionHandler } from "../utils/exceptionHandler";
+import FormInput from "../components/FormInput";
 import { useNavigation } from "@react-navigation/native";
+import { exceptionHandler } from "../utils/exceptionHandler";
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const nav = useNavigation()
+  const nav = useNavigation();
   const fields = [
     {
       icon: "user",
@@ -35,12 +34,14 @@ export default function Login() {
     },
   ];
 
-  const { logUser } = useFirebaseAuth();
-  const login = async () => {
-    const [data, error] = await exceptionHandler(logUser, {
+  const { createUser } = useFirebaseAuth();
+
+  const create = async () => {
+    const [data, error] = await exceptionHandler(createUser, {
       email,
       password,
     });
+    console.log(data)
     if (error) {
       SignInWrapper.showToast({
         title: "Authentication Error",
@@ -51,20 +52,20 @@ export default function Login() {
   };
 
   return (
-    <SignInWrapper heading="Sign In">
+    <SignInWrapper heading="Register">
       <View style={{ paddingVertical: 10, alignItems: "center", gap: 15 }}>
         <View style={{ gap: 10, width: "100%" }}>
           {fields.map(({ ...props }, index) => (
             <FormInput {...props} key={index} />
           ))}
         </View>
-        <FormButton buttonTitle="Log In" onPress={login} />
+        <FormButton buttonTitle="Sign Up" onPress={create}/>
         <View style={{ marginTop: 50, alignItems: "center", gap: 40 }}>
           <Dash length={windowWidth} thickness={3} color={Colors.grey60} />
           <SocialButton />
         </View>
 
-        <TouchableOpacity onPress={()=>nav.navigate("Register")}>
+        <TouchableOpacity onPress={() => nav.navigate("Login")}>
           <Text
             text70M
             underline
@@ -73,11 +74,10 @@ export default function Login() {
               fontWeight: "bold",
             }}
           >
-            Don't Have An Account? Create One
+            Aready Have An Account? LogIn
           </Text>
         </TouchableOpacity>
       </View>
-      {/* <SignInWrapper.Toast/> */}
     </SignInWrapper>
   );
 }

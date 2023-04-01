@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import OnBoardingScreen from '../Screens/OnBoardingScreen';
 import Login from '../Screens/Login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Register from '../Screens/Register';
 
 export default function AuthStack() {
   const [isFirstLaunch,setIsFirstLaunch] = useState(null)
@@ -11,7 +12,7 @@ export default function AuthStack() {
 
   useEffect(() => {
     AsyncStorage.getItem("isFirst").then(value=>{
-      console.log(value)
+      // console.log(value)
       if(value === null){
         AsyncStorage.setItem("isFirst",'true').then(()=>setIsFirstLaunch(true));
       }
@@ -29,7 +30,8 @@ export default function AuthStack() {
   return (
     <Stack.Navigator initialRouteName={routeName}>
       <Stack.Screen name='OnBoarding' component={OnBoardingScreen} options={{ headerShown: false }} />
-      <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
+      <Stack.Screen name='Login' component={Login} options={{headerShown:false,animation:"slide_from_left"}}/>
+      <Stack.Screen name='Register' component={Register} options={{headerShown:false,animation:"slide_from_right"}}/>
     </Stack.Navigator>
   )
 }

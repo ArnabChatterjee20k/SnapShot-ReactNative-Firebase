@@ -1,5 +1,16 @@
 import { useFirebase } from "../utils/useFirebase"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 export default function useFirebaseAuth() {
-    return null
+    const {auth} = useFirebase()
+
+    async function createUser({email,password}){
+        const user = await createUserWithEmailAndPassword(auth,email,password)
+        return user.user
+    }
+
+    async function logUser({email,password}){
+        const user = await signInWithEmailAndPassword(auth,email,password)
+        return user.user
+    }
+    return {createUser,logUser}
 }
